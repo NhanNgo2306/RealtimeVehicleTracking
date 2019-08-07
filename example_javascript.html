@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Vehicle Info Tracking</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" />
+	<script src="http://messaging-public.realtime.co/js/2.1.0/ortc.js"></script>
+  </head>
+  <body>
+	<script>
+    ortcClient = RealtimeMessaging.createClient();
+    ortcClient.setClusterUrl('https://ortc-developers.realtime.co/server/ssl/2.1/');
+    ortcClient.connect('<YOUR TOKEN>', 'testToken');
+ 
+    ortcClient.onConnected = function(ortc) {
+ 
+      ortcClient.subscribe('gps', true, function(ortc, channel, message) {
+		var gpsObject = JSON.parse(new String(message));
+		console.log(gpsObject);
+      });
+	  
+	  ortcClient.subscribe('battery_status', true, function(ortc, channel, message) {
+		var messageObject = JSON.parse(new String(message));
+      });
+	  
+	  ortcClient.subscribe('system_status', true, function(ortc, channel, message) {
+		var messageObject = JSON.parse(new String(message));
+      });
+	  ortcClient.subscribe('vibration', true, function(ortc, channel, message) {
+		var messageObject = JSON.parse(new String(message));
+      });
+	  
+	  ortcClient.subscribe('direction', true, function(ortc, channel, message) {
+		var messageObject = JSON.parse(new String(message));
+      });
+	  
+	  ortcClient.subscribe('altitude', true, function(ortc, channel, message) {
+		var messageObject = JSON.parse(new String(message));
+      });
+	  
+	  ortcClient.subscribe('air_speed', true, function(ortc, channel, message) {
+		var messageObject = JSON.parse(new String(message));
+	  console.log(messageObject)
+      });
+	  
+	  ortcClient.subscribe('attitude', true, function(ortc, channel, message) {
+		var messageObject = JSON.parse(new String(message));
+		console.log(messageObject)
+      });
+    };
+  </script>
+  </body>
+</html>
